@@ -3,7 +3,7 @@ import Cors from 'cors';
 // Initializing the cors middleware
 const cors = Cors({
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  origin: 'http://localhost:3001',
+  origin: process.env.FRONTEND_URL || 'http://localhost:3001',
 });
 
 // Helper method to wait for a middleware to execute before continuing
