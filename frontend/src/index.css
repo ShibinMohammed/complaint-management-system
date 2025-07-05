@@ -1,0 +1,631 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for a consistent color palette */
+:root {
+  --color-primary: #00e6e6; /* Cyan/Electric Blue - Primary accent */
+  --color-primary-dark: #00b3b3; /* Darker primary for hover */
+  --color-secondary: #8a2be2; /* Blue Violet - Secondary accent */
+  --color-secondary-light: #9932cc; /* Light Blue Violet */
+  --color-error: #ff6b6b; /* Softer red for errors */
+  --color-success: #6bff6b; /* Softer green for success */
+  --color-warning: #e6e600; /* Yellow for warnings */
+
+  --font-heading: 'Orbitron', sans-serif; /* Futuristic heading font */
+  --font-body: 'Rajdhani', sans-serif; /* Clean body font */
+
+  --spacing-unit: 1rem;
+}
+
+/* Dark Theme Variables (Default) */
+body.dark {
+  --color-bg-dark: #08081a; /* Even deeper dark background */
+  --color-bg-medium: #15152b; /* Slightly lighter for cards/forms */
+  --color-bg-light: #252540; /* Even lighter for hover/active states */
+  --color-text-light: #e8e8f2; /* Brighter off-white for main text */
+  --color-text-medium: #a0a0b5; /* Softer greyish for secondary text */
+
+  --button-shadow-color: rgba(0, 230, 230, 0.3);
+  --form-shadow-color: rgba(0, 0, 0, 0.6);
+  --input-focus-shadow-color: rgba(0, 230, 230, 0.5);
+  --table-header-bg: var(--color-bg-light);
+  --table-border-color: var(--color-bg-light);
+  --status-badge-text: var(--color-bg-dark);
+  --heading-glow-strength: 0.3; /* Reduced glow for dark mode headings */
+
+  /* Theme Toggle Button Specific */
+  --toggle-bg: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Gradient background */
+  --toggle-indicator-bg: var(--color-bg-dark); /* Dark background for indicator */
+  --toggle-icon-color: var(--color-primary); /* Primary color for icons */
+  --toggle-border: none; /* No border */
+  --toggle-shadow: 0 4px 15px rgba(0, 230, 230, 0.3); /* Shadow matching main buttons */
+}
+
+/* Light Theme Variables */
+body.light {
+  --color-bg-dark: #f0f0f5; /* Light background */
+  --color-bg-medium: #ffffff; /* White for cards/forms */
+  --color-bg-light: #e0e0e5; /* Even lighter for hover/active states */
+  --color-text-light: #333333; /* Dark text */
+  --color-text-medium: #666666; /* Darker greyish for secondary text */
+
+  /* Adjust primary/secondary for better contrast on light background */
+  --color-primary: #007bff; /* Blue */
+  --color-primary-dark: #0056b3; /* Darker Blue */
+  --color-secondary: #6f42c1; /* Purple */
+  --color-secondary-light: #5a32a0; /* Darker Purple */
+
+  /* Adjust button/shadows for light theme */
+  --button-shadow-color: rgba(0, 123, 255, 0.2);
+  --form-shadow-color: rgba(0, 0, 0, 0.1);
+  --form-border-color: rgba(0, 123, 255, 0.1);
+  --input-focus-shadow-color: rgba(0, 123, 255, 0.3);
+  --table-header-bg: #f8f9fa;
+  --table-border-color: #dee2e6;
+  --status-badge-text: #ffffff;
+  --heading-glow-strength: 0; /* No glow for light mode headings */
+
+  /* Theme Toggle Button Specific */
+  --toggle-bg: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Gradient background */
+  --toggle-indicator-bg: var(--color-bg-dark); /* Dark background for indicator */
+  --toggle-icon-color: var(--color-primary); /* Primary color for icons */
+  --toggle-border: none; /* No border */
+  --toggle-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Shadow matching main buttons */
+}
+
+/* Global Resets and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.1rem; /* Professional base font size */
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
+  transition: background-color 0.5s ease, color 0.5s ease; /* Smooth theme transition */
+}
+
+code {
+  font-family: monospace;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2);
+  flex-grow: 1;
+}
+
+/* Keyframe Animations */
+@keyframes glow {
+  0% { text-shadow: 0 0 5px rgba(0, 230, 230, var(--heading-glow-strength)); }
+  50% { text-shadow: 0 0 15px rgba(0, 230, 230, var(--heading-glow-strength)), 0 0 20px rgba(0, 230, 230, var(--heading-glow-strength)); }
+  100% { text-shadow: 0 0 5px rgba(0, 230, 230, var(--heading-glow-strength)); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBorder {
+  0% { border-color: var(--color-primary); }
+  50% { border-color: var(--color-primary-dark); }
+  100% { border-color: var(--color-primary); }
+}
+
+@keyframes buttonPress {
+  0% { transform: scale(1); box-shadow: 0 4px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.3)); }
+  50% { transform: scale(0.98); box-shadow: 0 2px 8px var(--button-shadow-color, rgba(0, 230, 230, 0.2)); }
+  100% { transform: scale(1); box-shadow: 0 4px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.3)); }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  animation: glow 3s infinite alternate; /* Apply glow animation */
+}
+
+h1 {
+  font-size: 3.2rem; /* Larger, more impactful heading */
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+  text-shadow: 0 0 10px var(--color-primary); /* Use primary color for hover glow */
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  padding: 0.9rem 2.2rem; /* Slightly larger padding */
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.3));
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* More pronounced letter spacing */
+  /* Removed global margin-top */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* More space between text and icon */
+  font-size: 1.1rem; /* Professional button font size */
+}
+
+button:hover {
+  background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary-light));
+  transform: translateY(-3px) scale(1.02); /* More pronounced hover effect */
+  box-shadow: 0 8px 25px var(--button-shadow-color, rgba(0, 230, 230, 0.6)); /* Stronger glow on hover */
+}
+
+button:active {
+  animation: buttonPress 0.2s ease-out; /* Add press animation */
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-bg-medium);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Theme Toggle Button Specific Styles */
+.theme-toggle-button {
+  position: relative;
+  width: 60px; /* Reduced width */
+  height: 30px; /* Adjusted height */
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); /* Use gradient background */
+  border-radius: 15px; /* Half of height for pill shape */
+  border: none; /* No border */
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.3)); /* Match main button shadow */
+  margin-top: 0; /* Override global button margin */
+  padding: 0; /* Remove padding */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space out icons */
+  overflow: hidden; /* Hide overflow of indicator */
+}
+
+.theme-toggle-button .toggle-indicator {
+  position: absolute;
+  width: 26px; /* Slightly smaller than height for visual balance */
+  height: 26px;
+  background-color: var(--color-bg-dark); /* Dark background for indicator */
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--color-primary); /* Primary color for icons */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle-button .sun-icon,
+.theme-toggle-button .moon-icon {
+  position: absolute;
+  font-size: 1.5rem; /* Adjusted icon size */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for icons */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for perfect centering */
+}
+
+/* Dark mode specific icon visibility */
+body.dark .theme-toggle-button .sun-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* Show sun */
+}
+
+body.dark .theme-toggle-button .moon-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5); /* Hide moon */
+}
+
+/* Light mode specific icon visibility */
+body.light .theme-toggle-button .sun-icon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5); /* Hide sun */
+}
+
+body.light .theme-toggle-button .moon-icon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* Show moon */
+}
+
+/* Forms */
+.form-container {
+  max-width: 550px; /* Slightly wider forms */
+  margin: calc(var(--spacing-unit) * 3) auto; /* More top/bottom margin */
+  background-color: var(--color-bg-medium);
+  padding: calc(var(--spacing-unit) * 3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--form-shadow-color, rgba(0, 0, 0, 0.6)), 0 0 20px var(--color-primary); /* Deeper shadow with glow */
+  border: 1px solid var(--form-border-color, rgba(0, 230, 230, 0.4)); /* Stronger subtle border */
+  animation: fadeIn 0.8s ease-out; /* Fade in animation */
+}
+
+.form-group {
+  margin-bottom: calc(var(--spacing-unit) * 1.5); /* Consistent spacing */
+}
+
+label {
+  display: block;
+  color: var(--color-text-light);
+  font-size: 1rem; /* Professional label font size */
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.75px;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  padding: 1rem; /* Larger input padding */
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-bg-light);
+  border-radius: 6px;
+  color: var(--color-text-light);
+  font-size: 1.05rem; /* Professional input font size */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--input-focus-shadow-color, rgba(0, 230, 230, 0.5)), 0 0 20px var(--color-primary); /* Stronger glowing focus */
+  animation: pulseBorder 1.5s infinite alternate; /* Pulse border on focus */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px; /* Taller text area */
+}
+
+.radio-group {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 1.5);
+  margin-top: var(--spacing-unit);
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.radio-group input[type="radio"] {
+  appearance: none;
+  width: 20px; /* Larger radio buttons */
+  height: 20px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.radio-group input[type="radio"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 5px rgba(0, 230, 230, 0.4); /* Stronger glow */
+}
+
+.radio-group input[type="radio"]:checked::before {
+  content: '';
+  width: 10px; /* Larger inner dot */
+  height: 10px;
+  background-color: var(--color-bg-medium);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-link-text {
+  text-align: center;
+  margin-top: calc(var(--spacing-unit) * 1.5);
+  font-size: 0.95rem;
+  color: var(--color-text-medium);
+}
+
+/* Messages (Success/Error) */
+.message {
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin-top: calc(var(--spacing-unit) * 1.5);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+  animation: fadeIn 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.message.success {
+  background-color: rgba(107, 255, 107, 0.1);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.message.error {
+  background-color: rgba(255, 107, 107, 0.1);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* Navigation */
+.navbar {
+  background-color: var(--color-bg-medium);
+  padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 2.5); /* More padding */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 230, 230, 0.3);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: calc(var(--spacing-unit) * 2.5); /* More space between links */
+}
+
+.navbar a {
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: 1.2rem; /* Larger nav links */
+  font-weight: 500;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar a:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 12px var(--color-primary); /* Use primary color for hover glow */
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px; /* Thicker underline */
+  bottom: -8px; /* Lower underline */
+  left: 0;
+  background-color: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+.auth-status {
+  font-size: 1rem; /* Professional status font size */
+  color: var(--color-text-medium);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-status .username {
+  font-weight: 700;
+  color: var(--color-primary);
+  text-shadow: 0 0 8px var(--color-primary); /* Use primary color for glow */
+}
+
+.auth-status button {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 10px var(--button-shadow-color, rgba(0, 230, 230, 0.4));
+  margin-top: 0; /* Override global button margin for nav button */
+}
+
+.auth-status button:hover {
+  background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary-light));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.6));
+}
+
+/* Admin Dashboard Table */
+.admin-table-container {
+  background-color: var(--color-bg-medium);
+  padding: calc(var(--spacing-unit) * 3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--form-shadow-color, rgba(0, 0, 0, 0.6)), 0 0 20px var(--color-primary);
+  overflow-x: auto;
+  margin: calc(var(--spacing-unit) * 3) auto;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: calc(var(--spacing-unit) * 1.5);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 1.4); /* More padding for table cells */
+  text-align: left;
+  border-bottom: 1px solid var(--color-bg-light);
+}
+
+.admin-table th {
+  background-color: var(--color-bg-light);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-size: 1rem; /* Professional table header font size */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle zebra striping */
+}
+
+.admin-table tbody tr:hover {
+  background-color: var(--color-bg-light);
+  transition: background-color 0.3s ease;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5em 1em; /* Larger badge padding */
+  border-radius: 25px; /* More rounded */
+  font-size: 0.85rem; /* Professional badge font size */
+  font-weight: 600;
+  color: var(--status-badge-text, var(--color-bg-dark));
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.status-pending {
+  background-color: var(--color-warning);
+}
+
+.status-in-progress {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+.status-resolved {
+  background-color: var(--color-success);
+}
+
+.admin-table select {
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  padding: calc(var(--spacing-unit) * 0.7); /* Larger select padding */
+  color: var(--color-text-light);
+  font-size: 0.95rem; /* Professional select font size */
+  width: 100%;
+  appearance: none; /* Remove default select arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e8e8f2%22%20d%3D%22M287%2C197.3L159.3%2C69.7c-3.2-3.2-8.3-3.2-11.6%2C0L5.4%2C197.3c-3.2%2C3.2-3.2%2C8.3%2C0%2C11.6l11.6%2C11.6c3.2%2C3.2%2C8.3%2C3.2%2C11.6%2C0l118.3-118.3l118.3%2C118.3c3.2%2C3.2%2C8.3%2C3.2%2C11.6%2C0l11.6-11.6C290.2%2C205.6%2C290.2%2C200.5%2C287%2C197.3z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.8em top 50%;
+  background-size: 0.7em auto;
+  cursor: pointer;
+}
+
+.admin-table select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 230, 230, 0.4);
+}
+
+/* Loading and Error States */
+.loading-message,
+.error-message {
+  text-align: center;
+  font-size: 1.6rem; /* Larger messages */
+  padding: calc(var(--spacing-unit) * 3);
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-primary); /* Use primary color for glow */
+}
+
+.error-message {
+  color: var(--color-error);
+  text-shadow: 0 0 10px var(--color-error);
+}
+
+/* Filters Container */
+.filters-container {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: var(--color-bg-medium); /* Subtle background */
+  border: 1px solid var(--color-bg-light); /* Subtle border */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  padding: calc(var(--spacing-unit) * 1.2); /* Reduced padding */
+  border-radius: 8px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 0.5);
+}
+
+.filter-group label {
+  color: var(--color-text-medium); /* Softer color for labels */
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-group select {
+  width: auto;
+  padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 0.8);
+  font-size: 0.95rem;
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-bg-light);
+  border-radius: 6px;
+  color: var(--color-text-light);
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e8e8f2%22%20d%3D%22M287%2C197.3L159.3%2C69.7c-3.2-3.2-8.3-3.2-11.6%2C0L5.4%2C197.3c-3.2%2C3.2-3.2%2C8.3%2C0%2C11.6l11.6%2C11.6c3.2%2C3.2%2C8.3%2C3.2%2C11.6%2C0l118.3-118.3l118.3%2C118.3c3.2%2C3.2%2C8.3%2C3.2%2C11.6%2C0l11.6-11.6C290.2%2C205.6%2C290.2%2C200.5%2C287%2C197.3z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0.6em top 50%; /* Adjusted position */
+  background-size: 0.6em auto; /* Adjusted size */
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px rgba(0, 230, 230, 0.2); /* More subtle focus shadow */
+}
