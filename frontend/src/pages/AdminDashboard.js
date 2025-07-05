@@ -52,7 +52,7 @@ function AdminDashboard() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:3000/api/complaints/${id}`, { status: newStatus });
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/complaints/${id}`, { status: newStatus });
       fetchComplaints(); // Refresh the list after update
     } catch (err) {
       console.error('Error updating status:', err);

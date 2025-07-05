@@ -25,7 +25,7 @@ function ComplaintForm() {
     setIsSuccess(false);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/complaints', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/complaints`, formData);
       setMessage('Complaint submitted successfully!');
       setIsSuccess(true);
       setFormData({
