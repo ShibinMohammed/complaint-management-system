@@ -120,7 +120,7 @@ EMAIL_PASS=your_email_password_or_app_password
 ADMIN_EMAIL=admin_recipient_email@example.com
 ```
 
-*   **`MONGO_URI`**: Your MongoDB connection string. For MongoDB Atlas, it looks like `mongodb+srv://username:password@cluster0.mongodb.net/complaint-management`. For local, it might be `mongodb://localhost:27017/complaint-management`.
+*   **`MONGO_URI`**: Your MongoDB connection string. For MongoDB Atlas, it looks like `mongodb+srv://<username>:<password>@<cluster-address>/<database-name>`. For local, it might be `mongodb://localhost:27017/complaint-management`.
 *   **`JWT_SECRET`**: A long, random, and complex string. **Do NOT share this publicly.** You can generate one using `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`.
 *   **`JWT_EXPIRES_IN`**: Expiration time for JWTs (e.g., `1h`, `7d`).
 *   **Email Configuration**: Fill in your SMTP server details. If using Gmail with 2FA, you'll need an "App password". `EMAIL_SECURE` should be `true` for port 465 (SSL) and `false` for port 587 (TLS/STARTTLS).
