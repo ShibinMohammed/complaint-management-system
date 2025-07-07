@@ -118,6 +118,7 @@ function AdminDashboard() {
               <th>Title</th>
               <th>Category</th>
               <th>Priority</th>
+              <th>Date Submitted</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -128,6 +129,7 @@ function AdminDashboard() {
                 <td>{complaint.title}</td>
                 <td>{complaint.category}</td>
                 <td>{complaint.priority}</td>
+                <td>{new Date(complaint.dateSubmitted).toLocaleDateString()}</td>
                 <td>
                   <span className={`status-badge ${getStatusClass(complaint.status)}`}>
                     {complaint.status === 'Pending' && <FaHourglassHalf />}
