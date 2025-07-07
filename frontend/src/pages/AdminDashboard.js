@@ -149,16 +149,19 @@ function AdminDashboard() {
                     {` ${complaint.status}`}
                   </span>
                 </td>
-                <td>
-                  <select
-                    value={complaint.status}
-                    onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Resolved">Resolved</option>
-                  </select>
-                  <button onClick={() => handleDelete(complaint._id)} className="delete-button">Delete</button>
+                <td style={{ verticalAlign: 'top', paddingTop: '10px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                    <select
+                      value={complaint.status}
+                      onChange={(e) => handleStatusChange(complaint._id, e.target.value)}
+                      style={{ minWidth: '120px' }}
+                    >
+                      <option value="Pending">Pending</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Resolved">Resolved</option>
+                    </select>
+                    <button onClick={() => handleDelete(complaint._id)} className="delete-button">Delete</button>
+                  </div>
                 </td>
               </tr>
             ))}

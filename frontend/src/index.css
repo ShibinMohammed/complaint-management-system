@@ -192,6 +192,60 @@ button:disabled {
   transform: none;
 }
 
+.delete-button {
+  background: linear-gradient(45deg, #ff4d4d, #cc0000); /* Red gradient for delete */
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); /* Red shadow */
+  padding: 0.7rem 1.5rem; /* Adjusted padding */
+  min-width: 100px; /* Ensure text is not cut off */
+  font-size: 0.95rem; /* Slightly smaller font for better fit */
+  margin-top: 5px; /* Small margin to separate from dropdown */
+}
+
+.delete-button:hover {
+  background: linear-gradient(45deg, #cc0000, #990000); /* Darker red on hover */
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.6); /* Stronger red glow on hover */
+  transform: translateY(-2px) scale(1.01); /* Subtle hover effect */
+}
+
+/* Theme Toggle Button Specific Styles */
+button {
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+  color: white;
+  padding: 0.9rem 2.2rem; /* Slightly larger padding */
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--button-shadow-color, rgba(0, 230, 230, 0.3));
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* More pronounced letter spacing */
+  /* Removed global margin-top */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* More space between text and icon */
+  font-size: 1.1rem; /* Professional button font size */
+}
+
+button:hover {
+  background: linear-gradient(45deg, var(--color-primary-dark), var(--color-secondary-light));
+  transform: translateY(-3px) scale(1.02); /* More pronounced hover effect */
+  box-shadow: 0 8px 25px var(--button-shadow-color, rgba(0, 230, 230, 0.6)); /* Stronger glow on hover */
+}
+
+button:active {
+  animation: buttonPress 0.2s ease-out; /* Add press animation */
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-bg-medium);
+  box-shadow: none;
+  transform: none;
+}
+
 /* Theme Toggle Button Specific Styles */
 .theme-toggle-button {
   position: relative;
