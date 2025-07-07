@@ -59,6 +59,17 @@ function AdminDashboard() {
     }
   };
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this complaint?')) {
+      try {
+        await axios.delete(`${process.env.REACT_APP_API_URL}/api/complaints/${id}`);
+        fetchComplaints(); // Refresh the list after update
+      } catch (err) {
+        console.error('Error deleting complaint:', err);
+      }
+    }
+  };
+
   const getStatusClass = (status) => {
     switch (status) {
       case 'Pending':
@@ -147,6 +158,7 @@ function AdminDashboard() {
                     <option value="In Progress">In Progress</option>
                     <option value="Resolved">Resolved</option>
                   </select>
+                  <button onClick={() => handleDelete(complaint._id)} className="delete-button">Delete</button>
                 </td>
               </tr>
             ))}
