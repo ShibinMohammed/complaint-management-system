@@ -22,7 +22,7 @@ export const sendNewComplaintEmail = async (complaint) => {
       <p><strong>Category:</strong> ${complaint.category}</p>
       <p><strong>Priority:</strong> ${complaint.priority}</p>
       <p><strong>Date Submitted:</strong> ${complaint.dateSubmitted}</p>
-      <p>View in Admin Panel: <a href="http://localhost:3001/admin">Link to Admin Dashboard</a></p>
+      <p>View in Admin Panel: <a href="${process.env.FRONTEND_URL}/admin">Link to Admin Dashboard</a></p>
     `,
   };
 
@@ -45,7 +45,7 @@ export const sendStatusUpdateEmail = async (complaint, previousStatus) => {
       <p><strong>Previous Status:</strong> ${previousStatus}</p>
       <p><strong>New Status:</strong> ${complaint.status}</p>
       <p><strong>Updated At:</strong> ${complaint.lastUpdated}</p>
-      <p>View in Admin Panel: <a href="http://localhost:3001/admin">Link to Admin Dashboard</a></p>
+      <p>View in Admin Panel: <a href="${process.env.FRONTEND_URL}/admin">Link to Admin Dashboard</a></p>
     `,
   };
 
