@@ -1,0 +1,14 @@
+.delete-button {
+  background: linear-gradient(45deg, #ff4d4d, #cc0000); /* Red gradient for delete */
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3); /* Red shadow */
+  padding: 0.7rem 1.5rem; /* Adjusted padding */
+  min-width: 100px; /* Ensure text is not cut off */
+  font-size: 0.95rem; /* Slightly smaller font for better fit */
+  margin-top: 5px; /* Small margin to separate from dropdown */
+}
+
+.delete-button:hover {
+  background: linear-gradient(45deg, #cc0000, #990000); /* Darker red on hover */
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.6); /* Stronger red glow on hover */
+  transform: translateY(-2px) scale(1.01); /* Subtle hover effect */
+}
