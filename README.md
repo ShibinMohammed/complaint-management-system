@@ -61,3 +61,14 @@ Manually create the first admin user in your MongoDB database. Hash the password
 *   **Backend:** Suitable for Vercel (for Next.js API routes), Railway, or Render.
 *   **Database:** MongoDB Atlas recommended.
 *   **Environment Variables:** Configure on hosting platforms for security.
+
+### For Recruiters: Testing Admin & Email Features
+To provide a smooth review experience, please note:
+
+1.  **Admin Login for Live Demo:**
+    *   **Username:** `Admin`
+    *   **Password:** `Adminpass123` (Please use these credentials to log in to the live demo and access the Admin Dashboard.)
+
+2.  **Email Notifications:**
+    *   All email notifications (new complaint submissions, status updates) from the live demo are configured to be sent to: `aditya.anand@primevacations.in`
+    *   **Note:** Email delivery might take a few minutes. Please check this inbox to verify the email functionality (Check spam folder too, just in case).
