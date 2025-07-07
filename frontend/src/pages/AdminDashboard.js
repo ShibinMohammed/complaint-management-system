@@ -27,7 +27,7 @@ function AdminDashboard() {
     setLoading(true);
     setError(null);
     try {
-      let url = 'http://localhost:3000/api/complaints';
+      let url = `${process.env.REACT_APP_API_URL}/api/complaints`;
       const params = new URLSearchParams();
 
       if (filterStatus) {
