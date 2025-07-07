@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/login', { username, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, { username, password });
       const { token, username: returnedUsername, isAdmin } = res.data;
       setToken(token);
       setUser({ username: returnedUsername, isAdmin });
